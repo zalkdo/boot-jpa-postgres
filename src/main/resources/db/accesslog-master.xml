@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <preConditions>
+        <runningAs username="postgresadmin"/>
+    </preConditions>
+
+    <changeSet id="1" author="postgresadmin">
+        <sql>
+            create table SERVER_IP(
+                log_id   VARCHAR(36) not null,
+                server_ip VARCHAR(40),
+                login_dt TIMESTAMP(0) WITH TIME ZONE,
+                CONSTRAINT SERVER_IP_PKEY PRIMARY KEY (log_id)
+            );
+        </sql>
+    </changeSet>
+
+    <changeSet id="2" author="postgresadmin">
+        <sql>
+            ALTER TABLE public.server_ip ALTER COLUMN server_ip TYPE varchar(1000) USING server_ip::varchar;
+        </sql>
+    </changeSet>
+</databaseChangeLog>

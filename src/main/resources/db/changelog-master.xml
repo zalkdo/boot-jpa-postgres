@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <preConditions>
+        <runningAs username="postgresadmin"/>
+    </preConditions>
+
+    <changeSet id="1" author="postgresadmin">
+        <createTable tableName="job">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="customer" type="varchar(50)"/>
+            <column name="description" type="varchar(255)"/>
+            <column name="jobStatus" type="varchar(20)"/>
+            <column name="dueDate" type="varchar(8)"/>
+            <column name="createdTime" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="updatedTime" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+        </createTable>
+
+        <createIndex indexName="idx_job_status" tableName="job">
+            <column name="jobStatus" type="varchar(20)"/>
+        </createIndex>
+
+        <createIndex indexName="idx_job_customer" tableName="job">
+            <column name="customer" type="varchar(50)"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet id="2" author="postgresadmin">
+        <addColumn tableName="job">
+            <column name="username" type="varchar(8)"/>
+        </addColumn>
+    </changeSet>
+
+</databaseChangeLog>

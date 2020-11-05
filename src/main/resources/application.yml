@@ -1,0 +1,32 @@
+#Database
+spring:
+  datasource:
+    url: jdbc:postgresql://192.168.137.101:31191/postgresdb
+    username: postgresadmin
+    password: admin123
+
+#Connection Pool
+    hikari:
+      connection-timeout: 20000
+      maximum-pool-size: 10
+
+#JPA
+  jpa:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQL95Dialect
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          lob:
+            non_contextual: true
+
+#liquibase
+  liquibase:
+    change-log: classpath:/db/db.changelog-yaml.yaml
