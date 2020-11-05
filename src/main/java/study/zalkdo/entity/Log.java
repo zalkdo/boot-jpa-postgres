@@ -16,7 +16,6 @@ import java.util.Date;
 public class Log implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String log_id;
 
     private String server_ip;

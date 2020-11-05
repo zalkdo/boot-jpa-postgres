@@ -26,4 +26,9 @@
             ALTER TABLE public.server_ip ALTER COLUMN server_ip TYPE varchar(1000) USING server_ip::varchar;
         </sql>
     </changeSet>
+
+    <changeSet id="3" author="postgresadmin">
+        <modifyDataType tableName="server_ip" columnName="log_id" newDataType="varchar(64)"></modifyDataType>
+    </changeSet>
+
 </databaseChangeLog>

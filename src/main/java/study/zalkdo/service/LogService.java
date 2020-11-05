@@ -1,30 +1,31 @@
 package study.zalkdo.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import study.zalkdo.dto.LogDto;
-import study.zalkdo.entity.Log;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import study.zalkdo.repository.LogReposigory;
+import study.zalkdo.dto.LogDto;
+import study.zalkdo.entity.Log;
+import study.zalkdo.repository.LogRepository;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class LogService {
 
     @Autowired
-    LogReposigory logReposigory;
+    private LogRepository logRepository;
 
     @SneakyThrows
     public void save(LogDto dto){
 
         ObjectMapper mapper = new ObjectMapper();
         Log log = mapper.convertValue(dto, Log.class);
-
         String ips = "";
         Enumeration e = NetworkInterface.getNetworkInterfaces();
         while(e.hasMoreElements()){
@@ -37,12 +38,17 @@ public class LogService {
             }
         }
         log.setServer_ip(ips);
-        logReposigory.save(log);
+        log.setLog_id(UUID.randomUUID().toString());
+        logRepository.save(log);
     }
 
     public List<LogDto> findAll(){
-        List<Log> results = logReposigory.findAll();
+        List<Log> results = logRepository.findAll();
+        List<LogDto> transResults = new ArrayList<>();
         ObjectMapper mapper = new ObjectMapper();
-        Jackson
+        for(Log log : results){
+            transResults.add(mapper.convertValue(log, LogDto.class));
+        }
+        return transResults;
     }
 }

@@ -1,11 +1,10 @@
 package study.zalkdo;
 
-import study.zalkdo.dto.LogDto;
-import study.zalkdo.entity.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import study.zalkdo.dto.LogDto;
 import study.zalkdo.service.LogService;
 
 import java.util.Date;
@@ -27,7 +26,6 @@ public class LogController {
     public void save(){
         LogDto dto = new LogDto();
         dto.setLogin_dt(new Date());
-        dto.setLog_id("test");
         logService.save(dto);
     }
 }
