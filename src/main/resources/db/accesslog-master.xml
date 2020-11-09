@@ -7,10 +7,10 @@
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
     <preConditions>
-        <runningAs username="postgresadmin"/>
+        <runningAs username="${POSTGRES_USER}"/>
     </preConditions>
 
-    <changeSet id="1" author="postgresadmin">
+    <changeSet id="1" author="${POSTGRES_USER}">
         <sql>
             create table SERVER_IP(
                 log_id   VARCHAR(36) not null,
@@ -21,13 +21,13 @@
         </sql>
     </changeSet>
 
-    <changeSet id="2" author="postgresadmin">
+    <changeSet id="2" author="${POSTGRES_USER}">
         <sql>
             ALTER TABLE public.server_ip ALTER COLUMN server_ip TYPE varchar(1000) USING server_ip::varchar;
         </sql>
     </changeSet>
 
-    <changeSet id="3" author="postgresadmin">
+    <changeSet id="3" author="${POSTGRES_USER}">
         <modifyDataType tableName="server_ip" columnName="log_id" newDataType="varchar(64)"></modifyDataType>
     </changeSet>
 

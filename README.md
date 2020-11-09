@@ -1,6 +1,6 @@
 # boot-jpa-postgres
 BOOT기반으로 REST + JPA + liquibase Sample
-###build.gradle
+### build.gradle
 ```
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -9,7 +9,7 @@ dependencies {
     runtimeOnly 'org.postgresql:postgresql'
     ...
 ```
-###JPA + Postgre + liquibase setting - application.yml
+### JPA + Postgre + liquibase setting - application.yml
 SpringBoot+JPA+Postgre 가이드 : https://jee-goo.tistory.com/entry/Spring-Boot-PostgreSQL-BackEnd
 ```
 spring:
@@ -48,7 +48,7 @@ spring:
     change-log: classpath:/db/db.changelog-yaml.yaml
 ```
 ### liquibase
-liquibase는 database schema 변경을 tracking 하여 관리할 수 있게 해주는 open source(flyway도 있다), 분할/격리로 가면서 단순한 Table관리에 유용할 것 같음.
+liquibase는 database schema 변경을 tracking 하여 관리할 수 있게 해주는 open source(flyway도 있다), MSA로 가면서 Table관리에 유용할 것 같음.
 ```
 #db.changelog-yaml.yaml
 databaseChangeLog:
@@ -155,7 +155,7 @@ k8s의 configMap을 통해서 applicationi.yml의 변수 값을 할당 하는 �
 >
 ```
 #k8s에서 임시pod로 타 pod ping하기(DNS)
- sudo kubectl run -i --tty --rm debug --image=alicek106/ubuntu:curl --restart=Never -- bash
- cat /etc/resolv.conf
- ping <<서비스명>>.default.svc.cluster.local
+$sudo kubectl run -i --tty --rm debug --image=alicek106/ubuntu:curl --restart=Never -- bash
+$cat /etc/resolv.conf
+$ping <<서비스명>>.default.svc.cluster.local
 ```

@@ -7,10 +7,10 @@
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
     <preConditions>
-        <runningAs username="postgresadmin"/>
+        <runningAs username="${POSTGRES_USER}"/>
     </preConditions>
 
-    <changeSet id="1" author="postgresadmin">
+    <changeSet id="1" author="${POSTGRES_USER}">
         <createTable tableName="job">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -35,7 +35,7 @@
         </createIndex>
     </changeSet>
 
-    <changeSet id="2" author="postgresadmin">
+    <changeSet id="2" author="${POSTGRES_USER}">
         <addColumn tableName="job">
             <column name="username" type="varchar(8)"/>
         </addColumn>
